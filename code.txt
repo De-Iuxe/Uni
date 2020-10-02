@@ -1,0 +1,173 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Хост: std-mysql
+-- Время создания: Сен 25 2020 г., 14:35
+-- Версия сервера: 5.7.26-0ubuntu0.16.04.1
+-- Версия PHP: 7.4.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- База данных: `std_1024`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Distsiplina`
+--
+
+CREATE TABLE `Distsiplina` (
+  `ID` int(11) NOT NULL,
+  `Kod dist` int(11) NOT NULL,
+  `Nazvanie` int(11) NOT NULL,
+  `Kyrs` int(11) NOT NULL,
+  `FK nomer plana` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Kod dist/tabel`
+--
+
+CREATE TABLE `Kod dist/tabel` (
+  `ID` int(11) NOT NULL,
+  `FK tabel nomer` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Plan`
+--
+
+CREATE TABLE `Plan` (
+  `ID` int(11) NOT NULL,
+  `God sozdaniya` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Prepodovately`
+--
+
+CREATE TABLE `Prepodovately` (
+  `ID` int(11) NOT NULL,
+  `FIO` int(11) NOT NULL,
+  `Kafedra` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Studenty`
+--
+
+CREATE TABLE `Studenty` (
+  `ID` int(11) NOT NULL,
+  `Fk Nomer bileta` int(11) NOT NULL,
+  `familia` int(11) NOT NULL,
+  `imya` int(11) NOT NULL,
+  `Otchestvo` int(11) NOT NULL,
+  `Kyrs` int(11) NOT NULL,
+  `Semestr` int(11) NOT NULL,
+  `Otsenka` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Studenty/distsiplina`
+--
+
+CREATE TABLE `Studenty/distsiplina` (
+  `Id` int(11) NOT NULL,
+  `FK nomer studen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `Distsiplina`
+--
+ALTER TABLE `Distsiplina`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK nomer plana` (`FK nomer plana`);
+
+--
+-- Индексы таблицы `Kod dist/tabel`
+--
+ALTER TABLE `Kod dist/tabel`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK tabel nomer` (`FK tabel nomer`);
+
+--
+-- Индексы таблицы `Studenty`
+--
+ALTER TABLE `Studenty`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `Fk Nomer bileta` (`Fk Nomer bileta`);
+
+--
+-- Индексы таблицы `Studenty/distsiplina`
+--
+ALTER TABLE `Studenty/distsiplina`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `FK nomer studen` (`FK nomer studen`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `Distsiplina`
+--
+ALTER TABLE `Distsiplina`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `Kod dist/tabel`
+--
+ALTER TABLE `Kod dist/tabel`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `Studenty`
+--
+ALTER TABLE `Studenty`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `Studenty/distsiplina`
+--
+ALTER TABLE `Studenty/distsiplina`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `Studenty`
+--
+ALTER TABLE `Studenty`
+  ADD CONSTRAINT `Studenty_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `Studenty/distsiplina` (`FK nomer studen`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
